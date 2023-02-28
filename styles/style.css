@@ -226,6 +226,8 @@ html {
   overflow: hidden;
 }
 
-html {
-  background-color: cyan;
+div.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
