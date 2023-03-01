@@ -1,0 +1,24 @@
+/* chatBox section styles */
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 4px solid #000;
+    height: 45vh;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input {
+        text-align: center;
+        width: 40%;
+    }
+    button {
+        width: 20%;
+        margin-top: 10px;
+    }
+}
