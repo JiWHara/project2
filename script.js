@@ -12,9 +12,9 @@ const dbRef = ref(database);
 // define array for questions (stretch goal: could add a customize option to allow users to enter questions/answers to database for future use)
 const questions = [
     "It's nice to meet you! Tell me, do you like hot dogs?",
-    "Here is question 3",
-    "Question 4 - remember 1 was already on screen",
-    "Final question (q5) before we show you the results!"
+    "What is your favourite hot dog topping?",
+    "How many hot dogs do you eat in a year?",
+    "What is your favourite place to get hot dogs?"
 ];
 
 
