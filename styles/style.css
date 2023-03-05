@@ -258,6 +258,7 @@ form button {
   margin-top: 10px;
 }
 
+/* Mixins */
 /* Global & Wrapper Styles */
 html {
   font-family: "Roboto", sans-serif;
@@ -267,7 +268,12 @@ html {
 }
 
 body {
-  font-size: 125%;
+  font-size: 100%;
+}
+@media only screen and (min-width: 560px) {
+  body {
+    font-size: 125%;
+  }
 }
 
 header {
