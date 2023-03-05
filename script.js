@@ -63,7 +63,7 @@ let questionNumber = 0;
             console.log(questions[questionNumber]);
 
             if (questionNumber >= 3) {
-                console.log("You're DONE no more for you");
+                console.log("Congratulations, you finished my quiz! Let me show you your answers:");
                 // add final info summary back to user here
                 questionNumber = 0;
                 
