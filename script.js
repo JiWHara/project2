@@ -24,8 +24,6 @@ const answers = ref(database, `/answers`);
 // restart default database to empty on page load using set
 set(answers, "");
 
-// define: array position as a variable
-let i = 0;
 
 // Create a function for pushing user inputs to database, to be called later
 const addToList = function (userResponse){
@@ -40,36 +38,50 @@ const form = document.querySelector('form');
 const ul = document.querySelector('ul');
 const submit = document.querySelector('button');
 
-// add eventlistener to submit action button || user response
+// define: array position as a variable
+let i = 0;
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
+// This is to check the i number and if we're at the end of the questions, stop the loop and present the data back to user and end program
+if (i < questions.length) {
+    // cycle through typical message functions
+    // add eventlistener to submit action button || user response
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    // Store user input in a variable
-    const input = document.querySelector('input');
-    const msg = input.value;
+        // Store user input in a variable
+        const input = document.querySelector('input');
+        const msg = input.value;
 
-    // Check if message exists, and if so, continue. If not, handle errors
-    if (msg){
-        console.log(msg);
+        // Check if message exists, and if so, continue. If not, handle errors
+        if (msg){
+            console.log(msg);
 
-        // submit user input to database
-        addToList(msg);
+            // submit user input to database
+            addToList(msg);
 
-        // clear input field to an empty string
-        input.value = "";
+            // clear input field to an empty string
+            input.value = "";
 
-    } else {
-        console.log("We have an error, there is no message");
-    }
-})
+            // add 1 to the increment variable to use when cycling to next question
+            i++;
+            console.log(i);
+            console.log(questions.length);
+
+        } else {
+            console.log("We have an error, there is no message");
+        }
+    })
+
+} else {
+    // then stop program
+    // return info to user
+    console.log("You're DONE no more for you");
+}
 
 
-// advance to next question array number.
-// if questions are done, then present all data back to user and end program
 // else vvv
-// add li as a child to the ul using user response as message
-// preinputted message from chatbot as a new li as child to ul
+    // add li as a child to the ul using user response as message
+    // preinputted message from chatbot as a new li as child to ul
 
 
 
