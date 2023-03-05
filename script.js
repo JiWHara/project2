@@ -37,52 +37,54 @@ const addToList = function (userResponse){
 const form = document.querySelector('form');
 const ul = document.querySelector('ul');
 const submit = document.querySelector('button');
-
 // define: array position as a variable
-let i = 0;
+let questionNumber = 0;
 
 // This is to check the i number and if we're at the end of the questions, stop the loop and present the data back to user and end program
-if (i < questions.length) {
+    
     // cycle through typical message functions
     // add eventlistener to submit action button || user response
     form.addEventListener('submit', (event) => {
         event.preventDefault();
-
         // Store user input in a variable
         const input = document.querySelector('input');
         const msg = input.value;
-
+        
         // Check if message exists, and if so, continue. If not, handle errors
         if (msg){
+            
             console.log(msg);
 
             // submit user input to database
             addToList(msg);
 
-            // clear input field to an empty string
-            input.value = "";
-
             // add 1 to the increment variable to use when cycling to next question
-            i++;
-            console.log(i);
+
+            console.log(questions[questionNumber]);
+
+            if (questionNumber >= 3) {
+                console.log("You're DONE no more for you");
+                // add final info summary back to user here
+                questionNumber = 0;
+                
+            } else questionNumber++
+            
+            console.log(questionNumber);
             console.log(questions.length);
+            
+            // add user input from database into li appended to the ul 
+            // add question to ul using question[i]
 
         } else {
             console.log("We have an error, there is no message");
         }
+        // clear input field to an empty string
+        input.value = "";
+
     })
-
-} else {
-    // then stop program
-    // return info to user
-    console.log("You're DONE no more for you");
-}
-
-
 // else vvv
     // add li as a child to the ul using user response as message
     // preinputted message from chatbot as a new li as child to ul
-
 
 
 // add styling for messages
