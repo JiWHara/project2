@@ -1,10 +1,10 @@
 import app from "./firebase.js";
-import { getDatabase, ref, set, get, onValue, push } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+import { getDatabase, ref, set, get, onValue, push} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
 //initialize db
 const database = getDatabase(app);
 // create a reference to our db
-const dbRef = ref(database);
+// const dbRef = ref(database);
 
 
 // next steps for hot dog bot
@@ -52,13 +52,29 @@ let questionNumber = 0;
         
         // Check if message exists, and if so, continue. If not, handle errors
         if (msg){
-            
-            console.log(msg);
-
             // submit user input to database
-            addToList(msg);
+            const firebaseObj = push(answers, msg);
+            const firebaseKey = firebaseObj.key;
+            console.log(firebaseKey);
+            const userRef = ref(database, `/${firebaseKey}`)
+            var dbRef = firebase.database().ref(firebaseKey);
 
-            // add 1 to the increment variable to use when cycling to next question
+            dbRef.child('myKey').once('value', function(snapshot) {
+                // get the ul element
+                const listItemElement = document.createElement('li');
+                let value = snapshot.val();
+                // create a new li element
+                listItemElement.textContent = value;
+                
+                // append the li element to the ul element
+                ul.appendChild(listItemElement);
+            });
+            // console.log(msg);
+
+
+            // addToList(msg);
+
+
 
             console.log(questions[questionNumber]);
 
@@ -66,8 +82,8 @@ let questionNumber = 0;
                 console.log("Congratulations, you finished my quiz! Let me show you your answers:");
                 // add final info summary back to user here
                 questionNumber = 0;
-                
-            } else questionNumber++
+            // add 1 to the increment variable to use when cycling to next question
+            } else questionNumber++;
             
             console.log(questionNumber);
             console.log(questions.length);
