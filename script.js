@@ -4,7 +4,7 @@ import { getDatabase, ref, set, get, onValue, push} from "https://www.gstatic.co
 //initialize db
 const database = getDatabase(app);
 // create a reference to our db
-// const dbRef = ref(database);
+ const dbRef = ref(database);
 
 
 // next steps for hot dog bot
@@ -44,60 +44,62 @@ let questionNumber = 0;
     
     // cycle through typical message functions
     // add eventlistener to submit action button || user response
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        // Store user input in a variable
-        const input = document.querySelector('input');
-        const msg = input.value;
-        
-        // Check if message exists, and if so, continue. If not, handle errors
-        if (msg){
-            // submit user input to database
-            const firebaseObj = push(answers, msg);
-            const firebaseKey = firebaseObj.key;
-            console.log(firebaseKey);
-            const userRef = ref(database, `/${firebaseKey}`)
-            var dbRef = firebase.database().ref(firebaseKey);
-
-            dbRef.child('myKey').once('value', function(snapshot) {
-                // get the ul element
-                const listItemElement = document.createElement('li');
-                let value = snapshot.val();
-                // create a new li element
-                listItemElement.textContent = value;
+    // check if question array has fully looped
+    if (questionNumber < 4){
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            // Store user input in a variable
+            const input = document.querySelector('input');
+            const msg = input.value;
+            
+            // Check if message exists, and if so, continue. If not, handle errors
+            if (msg){
+                // submit user input to database
+                const firebaseObj = push(answers, msg); 
+                    // create a new li element for user input
+                    const answerItemElement = document.createElement('li');
+                    // affix user msg to newly created element to be displayed
+                    answerItemElement.textContent = msg;
+                    // append the li element to the ul element for user input
+                    ul.appendChild(answerItemElement);
+                    // create li element for each element needed
+                    const questionItemElement = document.createElement('li');
+                    const summaryItemElement = document.createElement('li');
+                    const arrayItemElement = document.createElement('li');
+                console.log(questions[questionNumber]);
+                // check to see if array has ended
+                if (questionNumber === 4) {
+                    // add final info summary back to user here
+                    console.log("Congratulations, you finished my quiz! Let me show you your answers:");
+                    summaryItemElement.textContent = "Congratulations, you finished my quiz! Let me show you your answers:";
+                    ul.appendChild(summaryItemElement);
+                    arrayItemElement.textContent = answers.val();
+                    ul.appendChild(arrayItemElement);
+                } else 
                 
-                // append the li element to the ul element
-                ul.appendChild(listItemElement);
-            });
-            // console.log(msg);
+                
+                questionItemElement.textContent = questions[questionNumber];
+                ul.appendChild(questionItemElement);
+                // add 1 to the increment variable to use when cycling to next question
+                questionNumber++;
+                 console.log(questionNumber);
+                 
+                // console.log(questions.length);
+                
+                // add user input from database into li appended to the ul 
+                // add question to ul using question[i]
+    
+            } else {
+                console.log("We have an error, there is no message");
+            }
+            // clear input field to an empty string
+            input.value = "";
+    
+        });
+    } else {
+            form.removeEventListener('submit');  
+    }
 
-
-            // addToList(msg);
-
-
-
-            console.log(questions[questionNumber]);
-
-            if (questionNumber >= 3) {
-                console.log("Congratulations, you finished my quiz! Let me show you your answers:");
-                // add final info summary back to user here
-                questionNumber = 0;
-            // add 1 to the increment variable to use when cycling to next question
-            } else questionNumber++;
-            
-            console.log(questionNumber);
-            console.log(questions.length);
-            
-            // add user input from database into li appended to the ul 
-            // add question to ul using question[i]
-
-        } else {
-            console.log("We have an error, there is no message");
-        }
-        // clear input field to an empty string
-        input.value = "";
-
-    })
 // else vvv
     // add li as a child to the ul using user response as message
     // preinputted message from chatbot as a new li as child to ul
