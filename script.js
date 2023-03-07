@@ -102,15 +102,20 @@ form.addEventListener('submit', function(event) {
         // Question 1
         if (i === 0){
 
-            // No logic to check answer against, lodge answer, produce messages and move on to next q
-            addToList(msg);
-            liGreenPlacement(msg);
-            input.value = '';
-            dottedLiPlacement();
-            i++;
-            return setTimeout(() => {
-                computerQuestion(questions[0]);
-            }, 1250);
+            // logic to check if user inputted string not just numbers, lodge answer, produce messages and move on to next q
+            if (isNaN(msg)) {
+                addToList(msg);
+                liGreenPlacement(msg);
+                input.value = '';
+                dottedLiPlacement();
+                i++;
+                return setTimeout(() => {
+                    computerQuestion(questions[0]);
+                }, 1250);
+            } else {
+                computerQuestion("That doesn't look like a name to me. Could you try again with a name that isn't comprised of just numbers?");
+                input.value = '';
+        }
 
         // Question 2
         } else if (i === 1){
