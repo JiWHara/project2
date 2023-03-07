@@ -39,9 +39,7 @@ li {
     margin-left: auto;
     padding-right: 15px;
     text-align: right;
-    @include mq('phablet'){
-        min-width: 65%;
-    }
+    min-width: 65%;
 }
 
 .blue {
