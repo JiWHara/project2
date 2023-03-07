@@ -1,10 +1,7 @@
-// Import the functions you need from the SDKs you need
+// Importing Firebase initialization
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
+// Our web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAVrZZkJ2FVyreTdBQvp7TkuWgLe8QmQ_Y",
   authDomain: "hotdogbot-b4c38.firebaseapp.com",
@@ -18,6 +15,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
-
-        export default app;
+// Export module
+export default app;
